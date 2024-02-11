@@ -1,3 +1,4 @@
+// бібліотека
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
@@ -16,18 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (nameImage.trim() === '') {
       return iziToast.error({
-        message: 'Please enter a search query.',
+        message: 'Введіть вірне значення!',
         position: 'topRight',
       });
     }
 
     loader.style.display = 'inline-block';
 
-    fetchImages(nameImage);
+    giveImages(nameImage);
     event.target.reset();
   }
 
-  function fetchImages(nameImage) {
+  function giveImages(nameImage) {
     const BASE_URL = 'https://pixabay.com/api/';
     const KEY = '?key=42272316-28c697ce0580eb37211383c7d';
     const Q = `&q=${nameImage}`;
