@@ -1,4 +1,4 @@
-// бібліотека
+// бібліотека izitoast
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('.form');
   const gallery = document.querySelector('.gallery');
   const loader = document.querySelector('.loader');
-
+  let lightbox;
   form.addEventListener('submit', onCreateFormSubmit);
 
   function onCreateFormSubmit(event) {
@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loader.style.display = 'inline-block';
 
+    gallery.innerHTML = '';
+
     giveImages(nameImage);
     event.target.reset();
   }
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const SAFESEARCH = '&safesearch=true';
     const url = BASE_URL + KEY + Q + IMAGE_TYPE + ORIENTATION + SAFESEARCH;
 
-    return fetch(url)
+    fetch(url)
       .then(res => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -72,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
       link.setAttribute('href', link.querySelector('img').getAttribute('src'));
     });
 
-    const lightbox = new SimpleLightbox('.gallery a', {
+    lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
       captionDelay: 250,
     });
